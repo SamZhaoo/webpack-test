@@ -1,0 +1,21 @@
+.h1 {
+	color: red;
+}
+:global(.bg){
+    background: url('../imgs/dog2.jpg') no-repeat;
+    height: 20vh;
+    width: 400px;
+}
+.img1{
+    height: 250px;
+}
+.h2 {
+	color: blue;
+}
+:global(.water_img){
+    width: 200px;
+}
+
+.s{
+    width: 100px;
+}
