@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --content-base ./dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=production webpack --mode=production"
+    "build": "cross-env NODE_ENV=production webpack --mode=production --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-loader": "^8.1.0",
     "html-withimg-loader": "^0.1.16",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
     "webpack": "^4.44.1"
   },
   "devDependencies": {

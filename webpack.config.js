@@ -4,12 +4,22 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const MiniCssExtractPlugin = require('MiniCssExtractPlugin') // 分离css webpack4不支持extract-text-webpack-plugin
 var devFlagPlugin = new webpack.DefinePlugin({
-    env_dev: JSON.stringify('env_dev'),
-    env_pro: JSON.stringify('env_pro'),
+	env_dev: JSON.stringify('env_dev'),
+	env_pro: JSON.stringify('env_pro'),
 })
+if (process.env.type == 'build') {
+	var website = {
+		publicPath: 'http://192.168.0.104:1717/',
+	}
+} else {
+	var website = {
+		publicPath: 'http://cdn.jspang.com/',
+	}
+}
+console.log(website)
 // console.log(__dirname)//项目路径
 module.exports = {
-    devtool: 'eval-source-map',// 调试打包代码
+	// devtool: 'eval-source-map', // 调试打包代码
 	entry: {
 		bundle1: './src/index.js',
 		bundle2: './src/content.js',
@@ -26,7 +36,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
-				exclude:/node_modules/
+				exclude: /node_modules/,
 			},
 			// {
 			// 	test: /\.css$/,
@@ -69,16 +79,16 @@ module.exports = {
 						options: {
 							name: '[name].[ext]',
 							limit: 8192,
-                            outputPath: 'imgs/',
-                            esModule:false
+							outputPath: 'imgs/',
+							esModule: false,
 						},
 					},
 				],
-            },
-            {
-                test: /\.(htm|html)$/i,
-                 use:[ 'html-withimg-loader'] 
-            }
+			},
+			{
+				test: /\.(htm|html)$/i,
+				use: ['html-withimg-loader'],
+			},
 		],
 	},
 
@@ -89,7 +99,11 @@ module.exports = {
 			template: './src/index.html',
 		}),
 		devFlagPlugin,
-		// new MiniCssExtractPlugin()
+		// new MiniCssExtractPlugin(),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			_: 'lodash',
+		}),
 	],
 	devServer: {
 		//设置基本目录结构
